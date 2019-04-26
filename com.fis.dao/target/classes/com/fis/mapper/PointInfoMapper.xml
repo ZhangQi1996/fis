@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fis.mapper.PointInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fis.domain.PointInfo" >
+    <id column="point_id" property="point_id" jdbcType="VARCHAR" />
+    <result column="temp" property="temp" jdbcType="DOUBLE" />
+    <result column="ad0" property="ad0" jdbcType="DOUBLE" />
+    <result column="ad1" property="ad1" jdbcType="DOUBLE" />
+    <result column="sensor_temp" property="sensor_temp" jdbcType="DOUBLE" />
+    <result column="sensor_humid" property="sensor_humid" jdbcType="DOUBLE" />
+    <result column="yl" property="yl" jdbcType="DOUBLE" />
+    <result column="zigbee_temp" property="zigbee_temp" jdbcType="DOUBLE" />
+    <result column="zigbee_humid" property="zigbee_humid" jdbcType="DOUBLE" />
+    <result column="wind_direct" property="wind_direct" jdbcType="VARCHAR" />
+    <result column="wind_power" property="wind_power" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    point_id, temp, ad0, ad1, sensor_temp, sensor_humid, yl, zigbee_temp, zigbee_humid, 
+    wind_direct, wind_power
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from point_info
+    where point_id = #{point_id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from point_info
+    where point_id = #{point_id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fis.domain.PointInfo" >
+    insert into point_info (point_id, temp, ad0, 
+      ad1, sensor_temp, sensor_humid, 
+      yl, zigbee_temp, zigbee_humid, 
+      wind_direct, wind_power)
+    values (#{point_id,jdbcType=VARCHAR}, #{temp,jdbcType=DOUBLE}, #{ad0,jdbcType=DOUBLE}, 
+      #{ad1,jdbcType=DOUBLE}, #{sensor_temp,jdbcType=DOUBLE}, #{sensor_humid,jdbcType=DOUBLE}, 
+      #{yl,jdbcType=DOUBLE}, #{zigbee_temp,jdbcType=DOUBLE}, #{zigbee_humid,jdbcType=DOUBLE}, 
+      #{wind_direct,jdbcType=VARCHAR}, #{wind_power,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fis.domain.PointInfo" >
+    insert into point_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="point_id != null" >
+        point_id,
+      </if>
+      <if test="temp != null" >
+        temp,
+      </if>
+      <if test="ad0 != null" >
+        ad0,
+      </if>
+      <if test="ad1 != null" >
+        ad1,
+      </if>
+      <if test="sensor_temp != null" >
+        sensor_temp,
+      </if>
+      <if test="sensor_humid != null" >
+        sensor_humid,
+      </if>
+      <if test="yl != null" >
+        yl,
+      </if>
+      <if test="zigbee_temp != null" >
+        zigbee_temp,
+      </if>
+      <if test="zigbee_humid != null" >
+        zigbee_humid,
+      </if>
+      <if test="wind_direct != null" >
+        wind_direct,
+      </if>
+      <if test="wind_power != null" >
+        wind_power,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="point_id != null" >
+        #{point_id,jdbcType=VARCHAR},
+      </if>
+      <if test="temp != null" >
+        #{temp,jdbcType=DOUBLE},
+      </if>
+      <if test="ad0 != null" >
+        #{ad0,jdbcType=DOUBLE},
+      </if>
+      <if test="ad1 != null" >
+        #{ad1,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor_temp != null" >
+        #{sensor_temp,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor_humid != null" >
+        #{sensor_humid,jdbcType=DOUBLE},
+      </if>
+      <if test="yl != null" >
+        #{yl,jdbcType=DOUBLE},
+      </if>
+      <if test="zigbee_temp != null" >
+        #{zigbee_temp,jdbcType=DOUBLE},
+      </if>
+      <if test="zigbee_humid != null" >
+        #{zigbee_humid,jdbcType=DOUBLE},
+      </if>
+      <if test="wind_direct != null" >
+        #{wind_direct,jdbcType=VARCHAR},
+      </if>
+      <if test="wind_power != null" >
+        #{wind_power,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fis.domain.PointInfo" >
+    update point_info
+    <set >
+      <if test="temp != null" >
+        temp = #{temp,jdbcType=DOUBLE},
+      </if>
+      <if test="ad0 != null" >
+        ad0 = #{ad0,jdbcType=DOUBLE},
+      </if>
+      <if test="ad1 != null" >
+        ad1 = #{ad1,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor_temp != null" >
+        sensor_temp = #{sensor_temp,jdbcType=DOUBLE},
+      </if>
+      <if test="sensor_humid != null" >
+        sensor_humid = #{sensor_humid,jdbcType=DOUBLE},
+      </if>
+      <if test="yl != null" >
+        yl = #{yl,jdbcType=DOUBLE},
+      </if>
+      <if test="zigbee_temp != null" >
+        zigbee_temp = #{zigbee_temp,jdbcType=DOUBLE},
+      </if>
+      <if test="zigbee_humid != null" >
+        zigbee_humid = #{zigbee_humid,jdbcType=DOUBLE},
+      </if>
+      <if test="wind_direct != null" >
+        wind_direct = #{wind_direct,jdbcType=VARCHAR},
+      </if>
+      <if test="wind_power != null" >
+        wind_power = #{wind_power,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where point_id = #{point_id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fis.domain.PointInfo" >
+    update point_info
+    set temp = #{temp,jdbcType=DOUBLE},
+      ad0 = #{ad0,jdbcType=DOUBLE},
+      ad1 = #{ad1,jdbcType=DOUBLE},
+      sensor_temp = #{sensor_temp,jdbcType=DOUBLE},
+      sensor_humid = #{sensor_humid,jdbcType=DOUBLE},
+      yl = #{yl,jdbcType=DOUBLE},
+      zigbee_temp = #{zigbee_temp,jdbcType=DOUBLE},
+      zigbee_humid = #{zigbee_humid,jdbcType=DOUBLE},
+      wind_direct = #{wind_direct,jdbcType=VARCHAR},
+      wind_power = #{wind_power,jdbcType=VARCHAR}
+    where point_id = #{point_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

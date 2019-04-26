@@ -1,0 +1,9 @@
+com\fis\controller\PictureController.class
+com\fis\controller\VideoController.class
+com\fis\controller\LoginController.class
+com\fis\controller\IpController.class
+com\fis\controller\WeatherController.class
+com\fis\controller\PageController.class
+com\fis\controller\PointController.class
+com\fis\controller\PredictController.class
+com\fis\controller\ExcelController.class

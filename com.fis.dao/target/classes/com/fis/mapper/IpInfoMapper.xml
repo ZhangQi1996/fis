@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fis.mapper.IpInfoMapper" >
+
+    <resultMap id="BaseResultMap" type="com.fis.domain.IpInfo" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="miniip" property="miniip" jdbcType="BIGINT" />
+        <result column="maxip" property="maxip" jdbcType="BIGINT" />
+        <result column="continent" property="continent" jdbcType="VARCHAR" />
+        <result column="areacode" property="areacode" jdbcType="VARCHAR" />
+        <result column="adcode" property="adcode" jdbcType="VARCHAR" />
+        <result column="country" property="country" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="district" property="district" jdbcType="VARCHAR" />
+        <result column="bd_lon" property="bdLon" jdbcType="VARCHAR" />
+        <result column="bd_lat" property="bdLat" jdbcType="VARCHAR" />
+        <result column="wgs_lon" property="wgsLon" jdbcType="VARCHAR" />
+        <result column="wgs_lat" property="wgsLat" jdbcType="VARCHAR" />
+        <result column="radius" property="radius" jdbcType="VARCHAR" />
+        <result column="scence" property="scence" jdbcType="VARCHAR" />
+        <result column="accuracy" property="accuracy" jdbcType="VARCHAR" />
+        <result column="OWNER" property="owner" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, miniip, maxip, continent, areacode, adcode, country, province, city, district, 
+        bd_lon, bd_lat, wgs_lon, wgs_lat, radius, scence, accuracy, OWNER
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from ip_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    
+    <select id="selectByIp" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select
+	    <include refid="Base_Column_List" />
+	    from ip_info 
+	    where miniip &lt;= 
+		INET_ATON(#{ip}) 
+		order by miniip desc limit 1;
+	</select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from ip_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.fis.domain.IpInfo" >
+        insert into ip_info (id, miniip, maxip, 
+            continent, areacode, adcode, 
+            country, province, city, 
+            district, bd_lon, bd_lat, 
+            wgs_lon, wgs_lat, radius, 
+            scence, accuracy, OWNER
+            )
+        values (#{id,jdbcType=INTEGER}, #{miniip,jdbcType=BIGINT}, #{maxip,jdbcType=BIGINT}, 
+            #{continent,jdbcType=VARCHAR}, #{areacode,jdbcType=VARCHAR}, #{adcode,jdbcType=VARCHAR}, 
+            #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+            #{district,jdbcType=VARCHAR}, #{bdLon,jdbcType=VARCHAR}, #{bdLat,jdbcType=VARCHAR}, 
+            #{wgsLon,jdbcType=VARCHAR}, #{wgsLat,jdbcType=VARCHAR}, #{radius,jdbcType=VARCHAR}, 
+            #{scence,jdbcType=VARCHAR}, #{accuracy,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.fis.domain.IpInfo" >
+        insert into ip_info
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="miniip != null" >
+                miniip,
+            </if>
+            <if test="maxip != null" >
+                maxip,
+            </if>
+            <if test="continent != null" >
+                continent,
+            </if>
+            <if test="areacode != null" >
+                areacode,
+            </if>
+            <if test="adcode != null" >
+                adcode,
+            </if>
+            <if test="country != null" >
+                country,
+            </if>
+            <if test="province != null" >
+                province,
+            </if>
+            <if test="city != null" >
+                city,
+            </if>
+            <if test="district != null" >
+                district,
+            </if>
+            <if test="bdLon != null" >
+                bd_lon,
+            </if>
+            <if test="bdLat != null" >
+                bd_lat,
+            </if>
+            <if test="wgsLon != null" >
+                wgs_lon,
+            </if>
+            <if test="wgsLat != null" >
+                wgs_lat,
+            </if>
+            <if test="radius != null" >
+                radius,
+            </if>
+            <if test="scence != null" >
+                scence,
+            </if>
+            <if test="accuracy != null" >
+                accuracy,
+            </if>
+            <if test="owner != null" >
+                OWNER,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="miniip != null" >
+                #{miniip,jdbcType=BIGINT},
+            </if>
+            <if test="maxip != null" >
+                #{maxip,jdbcType=BIGINT},
+            </if>
+            <if test="continent != null" >
+                #{continent,jdbcType=VARCHAR},
+            </if>
+            <if test="areacode != null" >
+                #{areacode,jdbcType=VARCHAR},
+            </if>
+            <if test="adcode != null" >
+                #{adcode,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null" >
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="bdLon != null" >
+                #{bdLon,jdbcType=VARCHAR},
+            </if>
+            <if test="bdLat != null" >
+                #{bdLat,jdbcType=VARCHAR},
+            </if>
+            <if test="wgsLon != null" >
+                #{wgsLon,jdbcType=VARCHAR},
+            </if>
+            <if test="wgsLat != null" >
+                #{wgsLat,jdbcType=VARCHAR},
+            </if>
+            <if test="radius != null" >
+                #{radius,jdbcType=VARCHAR},
+            </if>
+            <if test="scence != null" >
+                #{scence,jdbcType=VARCHAR},
+            </if>
+            <if test="accuracy != null" >
+                #{accuracy,jdbcType=VARCHAR},
+            </if>
+            <if test="owner != null" >
+                #{owner,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.fis.domain.IpInfo" >
+        update ip_info
+        <set >
+            <if test="miniip != null" >
+                miniip = #{miniip,jdbcType=BIGINT},
+            </if>
+            <if test="maxip != null" >
+                maxip = #{maxip,jdbcType=BIGINT},
+            </if>
+            <if test="continent != null" >
+                continent = #{continent,jdbcType=VARCHAR},
+            </if>
+            <if test="areacode != null" >
+                areacode = #{areacode,jdbcType=VARCHAR},
+            </if>
+            <if test="adcode != null" >
+                adcode = #{adcode,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null" >
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null" >
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null" >
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="district != null" >
+                district = #{district,jdbcType=VARCHAR},
+            </if>
+            <if test="bdLon != null" >
+                bd_lon = #{bdLon,jdbcType=VARCHAR},
+            </if>
+            <if test="bdLat != null" >
+                bd_lat = #{bdLat,jdbcType=VARCHAR},
+            </if>
+            <if test="wgsLon != null" >
+                wgs_lon = #{wgsLon,jdbcType=VARCHAR},
+            </if>
+            <if test="wgsLat != null" >
+                wgs_lat = #{wgsLat,jdbcType=VARCHAR},
+            </if>
+            <if test="radius != null" >
+                radius = #{radius,jdbcType=VARCHAR},
+            </if>
+            <if test="scence != null" >
+                scence = #{scence,jdbcType=VARCHAR},
+            </if>
+            <if test="accuracy != null" >
+                accuracy = #{accuracy,jdbcType=VARCHAR},
+            </if>
+            <if test="owner != null" >
+                OWNER = #{owner,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.fis.domain.IpInfo" >
+        update ip_info
+        set miniip = #{miniip,jdbcType=BIGINT},
+            maxip = #{maxip,jdbcType=BIGINT},
+            continent = #{continent,jdbcType=VARCHAR},
+            areacode = #{areacode,jdbcType=VARCHAR},
+            adcode = #{adcode,jdbcType=VARCHAR},
+            country = #{country,jdbcType=VARCHAR},
+            province = #{province,jdbcType=VARCHAR},
+            city = #{city,jdbcType=VARCHAR},
+            district = #{district,jdbcType=VARCHAR},
+            bd_lon = #{bdLon,jdbcType=VARCHAR},
+            bd_lat = #{bdLat,jdbcType=VARCHAR},
+            wgs_lon = #{wgsLon,jdbcType=VARCHAR},
+            wgs_lat = #{wgsLat,jdbcType=VARCHAR},
+            radius = #{radius,jdbcType=VARCHAR},
+            scence = #{scence,jdbcType=VARCHAR},
+            accuracy = #{accuracy,jdbcType=VARCHAR},
+            OWNER = #{owner,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
